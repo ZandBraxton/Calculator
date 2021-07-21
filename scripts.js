@@ -1,3 +1,42 @@
+const result = document.querySelector('.display')
+
+//Get varible for button press
+const btn = document.querySelectorAll('button');
+btn.forEach((button) => {
+    button.addEventListener('click', () => {
+        const x = button.value
+        switch (x) {
+            case '.':
+            case '=':
+            case '+':
+            case '-':
+            case '*':
+            case '/':
+            case '%':
+                console.log(`operator ${x}`)
+                break
+            case 'AC':
+                console.log('All clear')
+                break
+            case 'C':
+                console.log('Clear')
+                break
+            default:
+                result.textContent = x
+                break
+        }
+      
+    })
+})
+
+//make display update
+
+
+
+
+
+
+
 function add(x, y) {
     return x + y
 }
@@ -27,7 +66,5 @@ function operate(n, x, y) {
     }
 }
 
-let x = 3
-let y = 4
-let n = '-'
-console.log(operate(n, x, y))
+
+
