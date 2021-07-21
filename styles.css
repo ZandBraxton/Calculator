@@ -1,0 +1,45 @@
+
+body {
+    margin: 0;
+}
+
+html {
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+    /* outline: 1px red solid !important; */
+}
+
+.container {
+    display: grid;
+    grid-template: [row1-start ];
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: repeat(6, 100px);
+    justify-content: center;
+    align-items: ;
+    margin-top: 200px;
+    
+}
+
+.equal {
+    justify-self: stretch;
+    width: 200px;
+}
+
+.display {
+    justify-self: stretch;
+    width: 400px;
+    grid-column: 1 / 5;
+    text-align: end;
+    outline: 1px black solid;
+    font-size: 56px;
+    padding-top: 30px;
+    overflow: hidden;
+}
+
+button {
+    font-size: 32px;
+}
