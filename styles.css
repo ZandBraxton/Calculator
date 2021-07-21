@@ -15,31 +15,64 @@ html {
 
 .container {
     display: grid;
-    grid-template: [row1-start ];
     grid-template-columns: repeat(4, 100px);
     grid-template-rows: repeat(6, 100px);
     justify-content: center;
     align-items: ;
     margin-top: 200px;
     
+    
 }
 
-.equal {
-    justify-self: stretch;
-    width: 200px;
-}
+
 
 .display {
     justify-self: stretch;
     width: 400px;
     grid-column: 1 / 5;
     text-align: end;
-    outline: 1px black solid;
     font-size: 56px;
     padding-top: 30px;
     overflow: hidden;
+    background-color: #d4d4d4;
+    outline: 1px solid black;
 }
 
 button {
-    font-size: 32px;
+    font-size: 40px;
+    color: white;
+    outline: 1px solid black;
+}
+
+.ac, .c {
+    background-color: #2d51d2;
+}
+
+.ac:hover, .c:hover {
+    background-color: #2542aa;
+}
+
+.operator {
+    background-color: #505050;
+}
+
+.operator:hover {
+    background-color: #262626;
+}
+
+.number {
+    background-color: #9b9b9b;
+}
+
+.number:hover {
+    background-color: #707070;
+}
+
+.equal {
+    width: 200px;
+    background-color: #ff9500;
+}
+
+.equal:hover {
+    background-color: #ca7600;
 }
