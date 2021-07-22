@@ -100,7 +100,7 @@ btn.forEach((button) => {
                 break
             case 'C':
                 if (y != null) {
-                    y = null
+                    y = 0
                     result.textContent = 0
                     break;
                 } else if (sum === "Error") {
@@ -111,7 +111,7 @@ btn.forEach((button) => {
                     result.textContent = 0
                     break
                 } else {
-                    x = null
+                    x = 0
                     result.textContent = 0
                     break
                 }
