@@ -2,22 +2,32 @@ const result = document.querySelector('.display')
 result.textContent = 0
 let x = null
 let y = null
+let y2 = null
 let n = null
 let sum = 0
+
 //Get varible for button press
 const btn = document.querySelectorAll('button');
 btn.forEach((button) => {
     button.addEventListener('click', () => {
+        remClass()
         const input = button.value
-        console.log(`First log ${x}`)
+        console.log(`First X ${x}`)
+        console.log(`First Y ${y}`)
+        console.log(`First N ${n}`)
+        console.log(`First Sum ${sum}`)
             switch (input) {
             case '=':
-            case '+':
-            case '-':
-            case '*':
-            case '/':
-            case '%':
                 if (x === null) {
+                    break
+                } else if (y2 != null) {
+                    x = parseFloat(x)
+                    y = parseFloat(y2)
+                    sum = operate(n, x, y)
+                    result.textContent = sum.toLocaleString()
+                    y2 = y
+                    y = null
+                    x = sum.toString()
                     break
                 } else if (y != null) {
                     if (x === "Error" || y === "Error") {
@@ -29,18 +39,61 @@ btn.forEach((button) => {
                     y = parseFloat(y)
                     sum = operate(n, x, y)
                     result.textContent = sum.toLocaleString()
+                    y2 = y
                     y = null
-                    n = input
                     x = sum.toString()
-                    console.log(x)
+                    break
+                } else if (sum != 0) {
+                    x = parseFloat(x)
+                    y = parseFloat(x)
+                    sum = operate(n, x, y)
+                    result.textContent = sum.toLocaleString()
+                    y = null
+                    x = sum.toString()
+                    break
+                }
+                break
+            case '+':
+            case '-':
+            case '*':
+            case '/':
+            case '%':
+                button.classList.add('selected')
+                y2 = null
+                if (x === null) {
+                    break
+                // } else if (sum != 0) {
+                //     x = parseFloat(x)
+                //     y = parseFloat(sum)
+                //     sum = operate(n, x, y)
+                //     console.log(typeof sum)
+                //     n = input
+                //     y = null
+                //     x = sum.toString()
+                //     break
+                } else if (y != null) {
+                    if (x === "Error" || y === "Error") {
+                        result.textContent = "Error"
+                        console.log("Hi")
+                        y = null
+                        break
+                    }
+                    console.log("hi")
+                    x = parseFloat(x)
+                    y = parseFloat(y)
+                    sum = operate(n, x, y)
+                    result.textContent = sum.toLocaleString()
+                    n = input
+                    y = null
+                    x = sum.toString()
                     break
                 }
                 n = input
-                console.log(n)
                 break
             case 'AC':
                 x = null
                 y = null
+                y2 = null
                 n = null
                 sum = 0
                 result.textContent = 0
@@ -54,6 +107,7 @@ btn.forEach((button) => {
                     x = null
                     y = null
                     n = null
+                    y2 = null
                     result.textContent = 0
                     break
                 } else {
@@ -63,9 +117,11 @@ btn.forEach((button) => {
                 }
                 break
             default:
+                y2 = null
                 if (n != null) {
                     if (y === null) {
                         y = input
+                        sum = 0;
                         result.textContent = y
                         break
                     } else {
@@ -80,19 +136,17 @@ btn.forEach((button) => {
                 } else {
                     result.textContent = input
                     x = input
-                    console.log(x)
                     break 
                 }
             }
+            console.log(`Second X ${x}`)
+            console.log(`Second Y ${y}`)
+            console.log(`Second N ${n}`)
+            console.log(`Second Sum ${sum}`)
     })
 })
 
 //make display update
-
-
-
-
-
 
 
 function add(x, y) {
@@ -135,4 +189,8 @@ function operate(n, x, y) {
 }
 
 
-
+function remClass () {
+    btn.forEach((button) => {
+        button.classList.remove('selected')
+    })
+}
