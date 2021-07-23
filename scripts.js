@@ -1,9 +1,9 @@
 const result = document.querySelector('.display')
 result.textContent = 0
-let x = null
-let y = null
-let y2 = null
-let n = null
+let constantVar = null
+let secondVar = null
+let secondVar2 = null
+let operator = null
 let sum = 0
 
 //Get varible for button press
@@ -12,44 +12,37 @@ btn.forEach((button) => {
     button.addEventListener('click', () => {
         remClass()
         const input = button.value
-        console.log(`First X ${x}`)
-        console.log(`First Y ${y}`)
-        console.log(`First N ${n}`)
-        console.log(`First Sum ${sum}`)
             switch (input) {
             case '=':
-                if (x === null) {
+                if (constantVar === null) {
                     break
-                } else if (y2 != null) {
-                    x = parseFloat(x)
-                    y = parseFloat(y2)
-                    sum = operate(n, x, y)
+                } else if (secondVar2 != null) {
+                    sum = operate(operator, constantVar, secondVar2)
                     result.textContent = sum.toLocaleString()
-                    y2 = y
-                    y = null
-                    x = sum.toString()
+                    constantVar = sum.toString()
                     break
-                } else if (y != null) {
-                    if (x === "Error" || y === "Error") {
+                } else if (secondVar != null) {
+                    if (constantVar === "Error" || secondVar === "Error") {
                         result.textContent = "Error"
-                        y = null
+                        secondVar = null
                         break
                     }
-                    x = parseFloat(x)
-                    y = parseFloat(y)
-                    sum = operate(n, x, y)
+                    if (constantVar === '.' || secondVar === '.') {
+                        result.textContent = "Error"
+                        secondVar = null
+                        break
+                    }
+                    sum = operate(operator, constantVar, secondVar)
                     result.textContent = sum.toLocaleString()
-                    y2 = y
-                    y = null
-                    x = sum.toString()
+                    secondVar2 = secondVar
+                    secondVar = null
+                    constantVar = sum.toString()
                     break
                 } else if (sum != 0) {
-                    x = parseFloat(x)
-                    y = parseFloat(x)
-                    sum = operate(n, x, y)
+                    sum = operate(operator, constantVar, secondVar)
                     result.textContent = sum.toLocaleString()
-                    y = null
-                    x = sum.toString()
+                    secondVar = null
+                    constantVar = sum.toString()
                     break
                 }
                 break
@@ -58,148 +51,166 @@ btn.forEach((button) => {
             case '*':
             case '/':
                 button.classList.add('selected')
-                y2 = null
-                if (x === null) {
+                // secondVar2 = null
+                if (constantVar === null) {
                     break
-                // } else if (sum != 0) {
-                //     x = parseFloat(x)
-                //     y = parseFloat(sum)
-                //     sum = operate(n, x, y)
-                //     console.log(typeof sum)
-                //     n = input
-                //     y = null
-                //     x = sum.toString()
-                //     break
-                } else if (y != null) {
-                    if (x === "Error" || y === "Error") {
+                } else if (secondVar != null) {
+                    if (constantVar === "Error" || secondVar === "Error") {
                         result.textContent = "Error"
-                        console.log("Hi")
-                        y = null
+                        secondVar = null
                         break
                     }
-                    console.log("hi")
-                    x = parseFloat(x)
-                    y = parseFloat(y)
-                    sum = operate(n, x, y)
+                    sum = operate(operator, constantVar, secondVar)
                     result.textContent = sum.toLocaleString()
-                    n = input
-                    y = null
-                    x = sum.toString()
+                    operator = input
+                    secondVar = null
+                    constantVar = sum.toString()
                     break
                 }
-                n = input
+                operator = input
                 break
             case '%':
-                //y2 = null
-                if (x === null) {
+                //secondVar2 = null
+                if (constantVar === null) {
                     break
-                } else if (y != null) {
-                    y = y / 100;
-                    result.textContent = y
+                } else if (secondVar != null) {
+                    secondVar = secondVar / 100;
+                    result.textContent = secondVar
                     break
                 }
-                x = x / 100;
-                result.textContent = x
+                constantVar = constantVar / 100;
+                result.textContent = constantVar
                 break
+            case '.':
+                secondVar2 = null
+                if (operator != null) {
+                    if (secondVar === null) {
+                        secondVar = input
+                        sum = 0;
+                        result.textContent = secondVar
+                        break
+                    } else {
+                        for (let i = 0; i < secondVar.length; i++) {
+                            if (secondVar[i] === '.') {
+                                return
+                            } 
+                        }
+                        secondVar += input
+                        result.textContent = secondVar
+                        break
+                    }
+                } else if (constantVar != null) {
+                    for (let i = 0; i < constantVar.length; i++) {
+                        if (constantVar[i] === '.') {
+                            return
+                        } 
+                    }
+                    constantVar += input
+                    result.textContent = constantVar
+                    break
+                } else {
+                    result.textContent = input
+                    constantVar = input
+                    break 
+                }
             case 'AC':
-                x = null
-                y = null
-                y2 = null
-                n = null
+                constantVar = null
+                secondVar = null
+                secondVar2 = null
+                operator = null
                 sum = 0
                 result.textContent = 0
                 break
             case 'C':
-                if (y != null) {
-                    y = 0
+                if (secondVar != null) {
+                    secondVar = null
+                    operator = null
                     result.textContent = 0
                     break;
                 } else if (sum === "Error") {
-                    x = null
-                    y = null
-                    n = null
-                    y2 = null
+                    constantVar = null
+                    secondVar = null
+                    operator = null
+                    secondVar2 = null
                     result.textContent = 0
                     break
                 } else {
-                    x = null
-                    y = null 
-                    y2 = null
-                    n = null
+                    constantVar = null
+                    secondVar = null 
+                    secondVar2 = null
+                    operator = null
                     sum = null
                     result.textContent = 0
                     break
                 }
                 break
             default:
-                y2 = null
-                if (n != null) {
-                    if (y === null) {
-                        y = input
+                secondVar2 = null
+                if (operator != null) {
+                    if (secondVar === null) {
+                        secondVar = input
                         sum = 0;
-                        result.textContent = y
+                        result.textContent = secondVar
                         break
                     } else {
-                        y += input
-                        result.textContent = y
+                        secondVar += input
+                        result.textContent = secondVar
                         break
                     }
                     
-                } else if (x != null) {
-                    x += input
-                    result.textContent = x
+                } else if (constantVar != null) {
+                    constantVar += input
+                    result.textContent = constantVar
                 } else {
                     result.textContent = input
-                    x = input
+                    constantVar = input
                     break 
                 }
             }
-            console.log(`Second X ${x}`)
-            console.log(`Second Y ${y}`)
-            console.log(`Second N ${n}`)
-            console.log(`Second Sum ${sum}`)
     })
 })
 
-//make display update
 
-
-function add(x, y) {
-
-    return x + y
-}
-
-function subtract (x, y) {
-    return x - y
-}
-
-function multiply (x, y) {
-    return x * y
-}
-
-function divide (x, y) {
-    if (x === 0 || y === 0) {
+function add(constantVar, secondVar) {
+    if (constantVar === '.' || secondVar === '.') {
         return "Error"
     }
-    return x / y
+    return parseFloat(constantVar) + parseFloat(secondVar)
 }
 
-function modulo (x, y) {
-    return x % y
+function subtract (constantVar, secondVar) {
+    if (constantVar === '.' || secondVar === '.') {
+        return "Error"
+    }
+    return parseFloat(constantVar) - parseFloat(secondVar)
 }
 
-function operate(n, x, y) {
-    switch(n) {
+function multiply (constantVar, secondVar) {
+    if (constantVar === '.' || secondVar === '.') {
+        return "Error"
+    }
+    return parseFloat(constantVar) * parseFloat(secondVar)
+}
+
+function divide (constantVar, secondVar) {
+    if (constantVar === 0 || secondVar === 0) {
+        return "Error"
+    }
+    if (constantVar === '.' || secondVar === '.') {
+        return "Error"
+    }
+    return parseFloat(constantVar) / parseFloat(secondVar)
+}
+function operate(operator, constantVar, secondVar) {
+    switch(operator) {
         case '+':
-            return add(x, y);
+            return Math.round(add(constantVar, secondVar));
         case '-':
-            return subtract(x, y);
+            return Math.round(subtract(constantVar, secondVar));
         case '*':
-            return multiply(x, y);
+            return Math.round(multiply(constantVar, secondVar));
         case '/':
-            return divide(x, y);
-        case '%':
-            return modulo(x, y);
+            return Math.round(divide(constantVar, secondVar));
     }
 }
 

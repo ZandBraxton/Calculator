@@ -1,6 +1,7 @@
 
 body {
     margin: 0;
+    background-color: #b4eef5;
 }
 
 html {
@@ -24,18 +25,26 @@ html {
     
 }
 
-
+.center {
+    background: rgb(73, 54, 54);
+    outline: 10px solid rgb(65, 55, 55);
+    height: 600px;
+    width: 400px;
+    margin: auto;
+}
 
 .display {
     justify-self: stretch;
     width: 400px;
     grid-column: 1 / 5;
     text-align: end;
-    font-size: 56px;
-    padding-top: 30px;
-    overflow: hidden;
+    font-size: 28px;
+    padding-top: 60px;
+    overflow:auto;
+    overflow-wrap: normal;
     background-color: #d4d4d4;
     outline: 1px solid black;
+    
 }
 
 button {
