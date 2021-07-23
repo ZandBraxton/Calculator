@@ -57,7 +57,6 @@ btn.forEach((button) => {
             case '-':
             case '*':
             case '/':
-            case '%':
                 button.classList.add('selected')
                 y2 = null
                 if (x === null) {
@@ -90,6 +89,18 @@ btn.forEach((button) => {
                 }
                 n = input
                 break
+            case '%':
+                //y2 = null
+                if (x === null) {
+                    break
+                } else if (y != null) {
+                    y = y / 100;
+                    result.textContent = y
+                    break
+                }
+                x = x / 100;
+                result.textContent = x
+                break
             case 'AC':
                 x = null
                 y = null
@@ -111,7 +122,11 @@ btn.forEach((button) => {
                     result.textContent = 0
                     break
                 } else {
-                    x = 0
+                    x = null
+                    y = null 
+                    y2 = null
+                    n = null
+                    sum = null
                     result.textContent = 0
                     break
                 }
